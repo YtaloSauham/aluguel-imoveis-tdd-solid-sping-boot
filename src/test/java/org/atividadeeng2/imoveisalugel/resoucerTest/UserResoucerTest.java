@@ -50,12 +50,12 @@ public class UserResoucerTest{
         userRepository.save(clientTest);
     }
 
-    /*
+
     @AfterEach
     void down(){
         userRepository.deleteAll();
     }
-*/
+
 
     @Test
     public void insereUmNovoUsuarioNoBancoDeDados() throws Exception {
@@ -81,6 +81,24 @@ public class UserResoucerTest{
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
     }
+
+
+    @Test
+    public void deletaUmClienteEspecificadoPorIDOuErro() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.delete("http://localhost:8080/users/1")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isNoContent());
+    }
+
+    @Test
+    public void fazAltualizacaoDoClienteOuErro() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.put("http://localhost:8080/users/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"name\": \"Ytalo2\", \"email\":\"fulano@hotmail.com\"}")).andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
 
 
 
