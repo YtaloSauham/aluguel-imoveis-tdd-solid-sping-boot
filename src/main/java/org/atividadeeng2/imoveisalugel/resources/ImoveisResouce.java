@@ -12,7 +12,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/imoveis")
+@RequestMapping(value = "/imovel")
 
 public class ImoveisResouce {
 
@@ -20,8 +20,7 @@ public class ImoveisResouce {
     private ImoveisServices imoveisServices;
 
     @GetMapping
-
-    public ResponseEntity<List<Imoveis>> findAllImoveiss(){
+    public ResponseEntity<List<Imoveis>> findAllImoveis(){
         List<Imoveis> listImoveisFromRepository = imoveisServices.findAllImoveissFromRepository();
         return ResponseEntity.ok().body(listImoveisFromRepository);
     }

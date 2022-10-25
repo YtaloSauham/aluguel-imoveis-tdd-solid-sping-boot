@@ -1,7 +1,8 @@
 package org.atividadeeng2.imoveisalugel.resoucerTest;
 
-import org.atividadeeng2.imoveisalugel.repositories.AluguelRepository;
-import org.atividadeeng2.imoveisalugel.resources.AluguelResouce;
+import org.atividadeeng2.imoveisalugel.entities.Imoveis;
+import org.atividadeeng2.imoveisalugel.repositories.ImoveisRepository;
+import org.atividadeeng2.imoveisalugel.resources.ImoveisResouce;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,34 +26,38 @@ public class ImoveisResoucerTest {
      MockMvc mockMvc;
 
     @Autowired
-    private AluguelResouce AluguelResouce;
+    private ImoveisResouce imoveisResouce;
 
     @Autowired
-    private AluguelRepository AluguelRepository;
+    private ImoveisRepository imoveisRepository;
 
 
-    /*
+
     @BeforeEach
     void up(){
-        Aluguel aluguelTest = new Aluguel();
-        AluguelRepository.save(aluguelTest);
+        Imoveis imoveisTest = new Imoveis();
+        imoveisRepository.save(imoveisTest);
     }
-*/
+
 
     @AfterEach
     void down(){
-        AluguelRepository.deleteAll();
+        imoveisRepository.deleteAll();
     }
 
 
-    @BeforeEach
     @Test
-    public void insereUmNovoAluguelNoBancoDeDados() throws Exception {
+    public void insereUmNovoImoveisNoBancoDeDados() throws Exception {
 
 
-        mockMvc.perform(MockMvcRequestBuilders.post("http://localhost:8080/aluguel")
+        mockMvc.perform(MockMvcRequestBuilders.post("http://localhost:8080/imovel")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"valorPago\": \"45.0\", \"observacao\":\"sofri calote\"}")).andDo(MockMvcResultHandlers.print())
+                .content("{\"endereco\": \"Rua 90 Quadra 70\", \"cep\":\"65000-000\"," +
+                        "\"metragem\":\"40m\",\"dormitorios\":\"4\"," +
+                        "\"suites\":\"2\"," +
+                        "\"vagasGaragen\":\"1\"," +
+                        "\"valorAluguelSugerido\":\"50\"" +
+                        ",\"observacao\":\"nao é calote dessa vez\"}")).andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.header().exists("Location"));
     }
 
@@ -60,34 +65,27 @@ public class ImoveisResoucerTest {
 
 
     @Test
-   public void retornaTodosOsaluguelesCadastrados() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("http://localhost:8080/aluguel"))
+   public void retornaTodosOsImoveisesCadastrados() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("http://localhost:8080/imovel"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
     }
 
 
     @Test
-    public void deletaUmalugueleEspecificadoPorIDOuErro() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.delete("http://localhost:8080/aluguel/1")
+    public void deletaUmImoveiseEspecificadoPorIDOuErro() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.delete("http://localhost:8080/imovel/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isNoContent());
     }
 
     @Test
-    public void fazAltualizacaoDoalugueleOuErro() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.put("http://localhost:8080/aluguel/1")
+    public void fazAltualizacaoDoImoveiseOuErro() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.put("http://localhost:8080/imovel/1")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"id\": \"1\",\"valorPago\": \"46.0\", \"observacao\":\"sofri calote\"}")).andDo(MockMvcResultHandlers.print())
+                        .content("{\"id\": \"1\",\"bairro\": \"Cohama\", \"observacao\":\"nada de calote\"}")).andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
-
-
-
-
-
-
-
 
 }

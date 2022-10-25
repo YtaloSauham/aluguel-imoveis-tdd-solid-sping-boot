@@ -3,6 +3,7 @@ package org.atividadeeng2.imoveisalugel.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.atividadeeng2.imoveisalugel.entities.enums.ImoveisTipoStatus;
 
 import java.io.Serializable;
 import java.util.List;
@@ -38,16 +39,18 @@ public class Imoveis implements Serializable {
 
     private String vagasGaragem;
 
-    private String valorAluguelSugerido;
+    private Double valorAluguelSugerido;
 
     private String observacao;
+
+    private Integer tipoImovel;
 
 
     public Imoveis(){
 
     }
 
-    public Imoveis(Long id, String endereco, String bairro, String cep, String metragem, String dormitorios, String banheiros, String suites, String vagasGaragem, String valorAluguelSugerido, String observacao) {
+    public Imoveis(Long id, String endereco, String bairro, String cep, String metragem, String dormitorios, String banheiros, String suites, String vagasGaragem, Double valorAluguelSugerido, String observacao,ImoveisTipoStatus tipoImovel) {
         this.id = id;
         this.endereco = endereco;
         this.bairro = bairro;
@@ -59,6 +62,7 @@ public class Imoveis implements Serializable {
         this.vagasGaragem = vagasGaragem;
         this.valorAluguelSugerido = valorAluguelSugerido;
         this.observacao = observacao;
+        setTipoImovel(tipoImovel);
     }
 
     public Long getId() {
@@ -93,6 +97,14 @@ public class Imoveis implements Serializable {
 
     public String getCep() {
         return cep;
+    }
+
+    public ImoveisTipoStatus getTipoImovel() {
+        return  ImoveisTipoStatus.valueOf(tipoImovel);
+    }
+
+    public void setTipoImovel( ImoveisTipoStatus  imoveisTipoStatusStatus) {
+        this.tipoImovel = imoveisTipoStatusStatus.getCode();
     }
 
     public void setCep(String cep) {
@@ -139,11 +151,11 @@ public class Imoveis implements Serializable {
         this.vagasGaragem = vagasGaragem;
     }
 
-    public String getValorAluguelSugerido() {
+    public Double getValorAluguelSugerido() {
         return valorAluguelSugerido;
     }
 
-    public void setValorAluguelSugerido(String valorAluguelSugerido) {
+    public void setValorAluguelSugerido(Double valorAluguelSugerido) {
         this.valorAluguelSugerido = valorAluguelSugerido;
     }
 
