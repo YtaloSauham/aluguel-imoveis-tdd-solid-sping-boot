@@ -46,7 +46,7 @@ public class LocacaoServices {
         LocacaoToUpdate.setDataFim(LocacaoUpdated.getDataFim());
         LocacaoToUpdate.setObservacao(LocacaoUpdated.getObservacao());
         LocacaoToUpdate.setDiaVencimento(LocacaoUpdated.getDiaVencimento());
-        LocacaoToUpdate.setPercentualMultal(LocacaoUpdated.getPercentualMultal());
+        LocacaoToUpdate.setPercentualMulta(LocacaoUpdated.getPercentualMulta());
         LocacaoToUpdate.setInquilino(LocacaoUpdated.getInquilino());
         LocacaoToUpdate.setImovel(LocacaoUpdated.getImovel());
 

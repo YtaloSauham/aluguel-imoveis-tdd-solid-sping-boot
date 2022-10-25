@@ -1,7 +1,7 @@
 package org.atividadeeng2.imoveisalugel.resoucerTest;
 
-import org.atividadeeng2.imoveisalugel.repositories.AluguelRepository;
-import org.atividadeeng2.imoveisalugel.resources.AluguelResouce;
+import org.atividadeeng2.imoveisalugel.repositories.LocacaoRepository;
+import org.atividadeeng2.imoveisalugel.resources.LocacaoResouce;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,34 +25,34 @@ public class LocacaoResoucerTest {
      MockMvc mockMvc;
 
     @Autowired
-    private AluguelResouce AluguelResouce;
+    private LocacaoResouce locacaoResouce;
 
     @Autowired
-    private AluguelRepository AluguelRepository;
+    private LocacaoRepository locacaoRepository;
 
 
     /*
     @BeforeEach
     void up(){
-        Aluguel aluguelTest = new Aluguel();
-        AluguelRepository.save(aluguelTest);
+        Locacao LocacaoTest = new Locacao();
+        LocacaoRepository.save(LocacaoTest);
     }
 */
 
     @AfterEach
     void down(){
-        AluguelRepository.deleteAll();
+        locacaoRepository.deleteAll();
     }
 
 
     @BeforeEach
     @Test
-    public void insereUmNovoAluguelNoBancoDeDados() throws Exception {
+    public void insereUmNovoLocacaoNoBancoDeDados() throws Exception {
 
 
-        mockMvc.perform(MockMvcRequestBuilders.post("http://localhost:8080/aluguel")
+        mockMvc.perform(MockMvcRequestBuilders.post("http://localhost:8080/locacao")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"valorPago\": \"45.0\", \"observacao\":\"sofri calote\"}")).andDo(MockMvcResultHandlers.print())
+                        .content("{\"valorAluguel\": \"70.00\",\"observacao\":\"nao é calote dessa vez\"}")).andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.header().exists("Location"));
     }
 
@@ -60,24 +60,24 @@ public class LocacaoResoucerTest {
 
 
     @Test
-   public void retornaTodosOsaluguelesCadastrados() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("http://localhost:8080/aluguel"))
+   public void retornaTodosOsLocacaoesCadastrados() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("http://localhost:8080/locacao"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
     }
 
 
     @Test
-    public void deletaUmalugueleEspecificadoPorIDOuErro() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.delete("http://localhost:8080/aluguel/1")
+    public void deletaUmLocacaoeEspecificadoPorIDOuErro() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.delete("http://localhost:8080/locacao/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isNoContent());
     }
 
     @Test
-    public void fazAltualizacaoDoalugueleOuErro() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.put("http://localhost:8080/aluguel/1")
+    public void fazAltualizacaoDoLocacaoeOuErro() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.put("http://localhost:8080/locacao/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"id\": \"1\",\"valorPago\": \"46.0\", \"observacao\":\"sofri calote\"}")).andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk());

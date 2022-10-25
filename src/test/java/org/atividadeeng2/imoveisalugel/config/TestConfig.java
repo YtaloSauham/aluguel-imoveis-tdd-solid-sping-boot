@@ -3,10 +3,12 @@ package org.atividadeeng2.imoveisalugel.config;
 
 import org.atividadeeng2.imoveisalugel.entities.Aluguel;
 import org.atividadeeng2.imoveisalugel.entities.Imoveis;
+import org.atividadeeng2.imoveisalugel.entities.Locacao;
 import org.atividadeeng2.imoveisalugel.entities.User;
 import org.atividadeeng2.imoveisalugel.entities.enums.ImoveisTipoStatus;
 import org.atividadeeng2.imoveisalugel.repositories.AluguelRepository;
 import org.atividadeeng2.imoveisalugel.repositories.ImoveisRepository;
+import org.atividadeeng2.imoveisalugel.repositories.LocacaoRepository;
 import org.atividadeeng2.imoveisalugel.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -30,6 +32,8 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private ImoveisRepository imoveisRepository;
 
+    @Autowired
+    private LocacaoRepository locacaoRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -40,6 +44,8 @@ public class TestConfig implements CommandLineRunner {
         Aluguel aluguelTest2 = new Aluguel();
 
         Imoveis imoveltest = new Imoveis();
+
+        Locacao locacaoTest = new Locacao();
 
         aluguelTest2.setObservacao("Sofri calote duas vezes");
         aluguelTest2.setValorPago(45.0);
@@ -53,6 +59,18 @@ public class TestConfig implements CommandLineRunner {
         imoveltest.setValorAluguelSugerido(500.00);
         imoveltest.setTipoImovel(ImoveisTipoStatus.APARTAMENTO);
 
+
+        locacaoTest.setId(1L);
+        locacaoTest.setImovel(imoveltest);
+        locacaoTest.setPercentualMulta(2.0);
+        locacaoTest.setDiaVencimento(LocalDate.now());
+        locacaoTest.setDataInicio(LocalDate.now());
+        locacaoTest.setDataFim(LocalDate.now());
+        locacaoTest.setAtivo(true);
+        locacaoTest.setObservacao("Esse aqui é calote,certeza");
+
+
+        locacaoRepository.save(locacaoTest);
         imoveisRepository.save(imoveltest);
         userRepository.saveAll(Arrays.asList(clientTest1, clientTest2));
         aluguelRepository.save(aluguelTest2);

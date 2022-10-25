@@ -29,12 +29,13 @@ public class Locacao implements Serializable {
     private User inquilino ;
 
 
+
     @ManyToOne
     @JoinColumn(name = "aluguel_id")
     private Aluguel aluguel ;
     private Double valorAluguel;
 
-    private Double percentualMultal;
+    private Double percentualMulta;
 
     private LocalDate diaVencimento;
 
@@ -49,10 +50,12 @@ public class Locacao implements Serializable {
     public Locacao(){}
 
 
-    public Locacao(Long id, Imoveis imovel, User inquilino, Double valorAluguel, Double percentualMultal, LocalDate diaVencimento, LocalDate dataInicio, LocalDate dataFim, Boolean ativo, String observacao) {
+    public Locacao(Long id, Imoveis imovel, User inquilino, Double valorAluguel, Double percentualMulta, LocalDate diaVencimento, LocalDate dataInicio, LocalDate dataFim, Boolean ativo, String observacao) {
         this.id = id;
         this.valorAluguel = valorAluguel;
-        this.percentualMultal = percentualMultal;
+        this.imovel = imovel;
+        this.inquilino=inquilino;
+        this.percentualMulta = percentualMulta;
         this.diaVencimento = diaVencimento;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
@@ -84,6 +87,9 @@ public class Locacao implements Serializable {
     public void setInquilino(User inquilino) {
         this.inquilino = inquilino;
     }
+    public void setAluguel(Aluguel aluguel) {
+        this.aluguel = aluguel;
+    }
 
     public Double getValorAluguel() {
         return valorAluguel;
@@ -93,12 +99,12 @@ public class Locacao implements Serializable {
         this.valorAluguel = valorAluguel;
     }
 
-    public Double getPercentualMultal() {
-        return percentualMultal;
+    public Double getPercentualMulta() {
+        return percentualMulta;
     }
 
-    public void setPercentualMultal(Double percentualMultal) {
-        this.percentualMultal = percentualMultal;
+    public void setPercentualMulta(Double percentualMulta) {
+        this.percentualMulta = percentualMulta;
     }
 
     public LocalDate getDiaVencimento() {
