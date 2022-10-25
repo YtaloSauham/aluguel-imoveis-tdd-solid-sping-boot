@@ -16,8 +16,12 @@ public class UserServices {
     @Autowired
     private UserRepository userRepository;
 
-    public void insertUserFromRepository(User user){
-        userRepository.save(user);
+    public User insertUserFromRepository(User user){
+        return userRepository.save(user);
+    }
+
+    public void insertAllUsersIntoRepository(List<User> users){
+         userRepository.saveAll(users);
     }
 
     public List<User> findAllUsersFromRepository(){
@@ -25,11 +29,25 @@ public class UserServices {
     }
 
     public User findUserByIdFromRepository(Long id){
-       Optional<User> userFounded = userRepository.findById(id);
-       return userFounded.orElseThrow(()-> new ResouceNotFoundException(id));
+       Optional<User> userToUpdate = userRepository.findById(id);
+       return userToUpdate.orElseThrow(()-> new ResouceNotFoundException(id));
 
     }
 
+    public User update(Long id, User userUpdated){
+        User userToUpdate = userRepository.getReferenceById(id);
+        updateData(userToUpdate,userUpdated);
+        return userRepository.save(userToUpdate);
+    }
+
+    private void updateData(User userToUpdate, User userUpdated) {
+        userToUpdate.setName(userUpdated.getName());
+        userToUpdate.setEmail(userUpdated.getEmail());
+        userToUpdate.setCpf(userUpdated.getCpf());
+        userToUpdate.setDataNascimento(userUpdated.getDataNascimento());
+        userToUpdate.setPhone(userToUpdate.getPhone());
+
+    }
 
 
 }
