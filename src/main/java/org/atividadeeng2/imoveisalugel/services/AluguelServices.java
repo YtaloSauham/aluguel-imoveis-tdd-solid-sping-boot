@@ -1,8 +1,8 @@
 package org.atividadeeng2.imoveisalugel.services;
 
 
-import org.atividadeeng2.imoveisalugel.entities.User;
-import org.atividadeeng2.imoveisalugel.repositories.UserRepository;
+import org.atividadeeng2.imoveisalugel.entities.Aluguel;
+import org.atividadeeng2.imoveisalugel.repositories.AluguelRepository;
 import org.atividadeeng2.imoveisalugel.services.exceptions.ResouceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,43 +14,42 @@ import java.util.Optional;
 public class AluguelServices {
 
     @Autowired
-    private UserRepository userRepository;
+    private AluguelRepository AluguelRepository;
 
-    public User insertUserFromRepository(User user){
-        return userRepository.save(user);
+    public Aluguel insertAluguelFromRepository(Aluguel Aluguel){
+        return AluguelRepository.save(Aluguel);
     }
 
-    public void insertAllUsersIntoRepository(List<User> users){
-         userRepository.saveAll(users);
+    public void insertAllAluguelsIntoRepository(List<Aluguel> Aluguels){
+         AluguelRepository.saveAll(Aluguels);
     }
 
-    public List<User> findAllUsersFromRepository(){
-        return userRepository.findAll();
+    public List<Aluguel> findAllAluguelsFromRepository(){
+        return AluguelRepository.findAll();
     }
 
-    public User findUserByIdFromRepository(Long id){
-       Optional<User> userToUpdate = userRepository.findById(id);
-       return userToUpdate.orElseThrow(()-> new ResouceNotFoundException(id));
-
-    }
-
-    public User update(Long id, User userUpdated){
-        User userToUpdate = userRepository.getReferenceById(id);
-        updateData(userToUpdate,userUpdated);
-        return userRepository.save(userToUpdate);
-    }
-
-    private void updateData(User userToUpdate, User userUpdated) {
-        userToUpdate.setName(userUpdated.getName());
-        userToUpdate.setEmail(userUpdated.getEmail());
-        userToUpdate.setCpf(userUpdated.getCpf());
-        userToUpdate.setDataNascimento(userUpdated.getDataNascimento());
-        userToUpdate.setPhone(userToUpdate.getPhone());
+    public Aluguel findAluguelByIdFromRepository(Long id){
+       Optional<Aluguel> AluguelToUpdate = AluguelRepository.findById(id);
+       return AluguelToUpdate.orElseThrow(()-> new ResouceNotFoundException(id));
 
     }
 
-    public void deleteUserById(Long id){
-        userRepository.deleteById(id);
+    public Aluguel update(Long id, Aluguel AluguelUpdated){
+        Aluguel AluguelToUpdate = AluguelRepository.getReferenceById(id);
+        updateData(AluguelToUpdate,AluguelUpdated);
+        return AluguelRepository.save(AluguelToUpdate);
+    }
+
+    private void updateData(Aluguel AluguelToUpdate, Aluguel AluguelUpdated) {
+        AluguelToUpdate.setDataPagamento(AluguelUpdated.getDataPagamento());
+        AluguelToUpdate.setDataVencimento(AluguelUpdated.getDataVencimento());
+        AluguelToUpdate.setValorPago(AluguelUpdated.getValorPago());
+        AluguelToUpdate.setObservacao(AluguelUpdated.getObservacao());
+
+    }
+
+    public void deleteAluguelById(Long id){
+        AluguelRepository.deleteById(id);
     }
 
 

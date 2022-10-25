@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -18,13 +19,14 @@ public class Aluguel {
 
     private LocalDate dataVencimento;
 
-    private Float valorPago;
+    private Double valorPago;
 
     private LocalDate dataPagamento;
 
     private String observacao;
 
-    public Aluguel(Long id, LocalDate dataVencimento, Float valorPago, LocalDate dataPagamento, String observacao) {
+
+    public Aluguel(Long id, LocalDate dataVencimento, Double valorPago, LocalDate dataPagamento, String observacao) {
         this.id = id;
         this.dataVencimento = dataVencimento;
         this.valorPago = valorPago;
@@ -51,11 +53,11 @@ public class Aluguel {
         this.dataVencimento = dataVencimento;
     }
 
-    public Float getValorPago() {
+    public Double getValorPago() {
         return valorPago;
     }
 
-    public void setValorPago(Float valorPago) {
+    public void setValorPago(Double valorPago) {
         this.valorPago = valorPago;
     }
 

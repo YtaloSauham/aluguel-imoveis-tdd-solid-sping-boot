@@ -1,7 +1,9 @@
 package org.atividadeeng2.imoveisalugel.config;
 
 
+import org.atividadeeng2.imoveisalugel.entities.Aluguel;
 import org.atividadeeng2.imoveisalugel.entities.User;
+import org.atividadeeng2.imoveisalugel.repositories.AluguelRepository;
 import org.atividadeeng2.imoveisalugel.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -19,16 +21,29 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private AluguelRepository aluguelRepository;
+
 
 
 
     @Override
     public void run(String... args) throws Exception {
+
         User clientTest1 = new User(1L,"Ytalo",99999,9999,"fulano@hotmail.com", LocalDate.of(2001,02,21));
         User clientTest2 = new User(2L,"Ytalo",99999,9999,"fulano@hotmail.com", LocalDate.of(2001,02,21));
 
+        Aluguel aluguelTest2 = new Aluguel();
+
+        aluguelTest2.setObservacao("Sofri calote duas vezes");
+        aluguelTest2.setValorPago(45.0);
+        aluguelTest2.setDataVencimento(LocalDate.of(2001,02,21));
+        aluguelTest2.setDataPagamento(LocalDate.of(2001,02,21));
+
+
 
         userRepository.saveAll(Arrays.asList(clientTest1, clientTest2));
+        aluguelRepository.save(aluguelTest2);
 
     }
 }
