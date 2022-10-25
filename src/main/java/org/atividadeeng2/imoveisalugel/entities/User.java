@@ -1,9 +1,12 @@
 package org.atividadeeng2.imoveisalugel.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name= "tb_clientes")
@@ -25,6 +28,10 @@ public class User implements Serializable {
     private String email;
 
     private LocalDate dataNascimento;
+
+    @OneToMany(mappedBy = "inquilino")
+    @JsonIgnore
+    private List<Locacao> locacao = new ArrayList<>();
 
     public User(){}
 
