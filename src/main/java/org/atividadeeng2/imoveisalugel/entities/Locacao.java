@@ -27,6 +27,11 @@ public class Locacao implements Serializable {
     @ManyToOne
     @JoinColumn(name = "inquilino_id")
     private User inquilino ;
+
+
+    @ManyToOne
+    @JoinColumn(name = "aluguel_id")
+    private Aluguel aluguel ;
     private Double valorAluguel;
 
     private Double percentualMultal;
@@ -134,6 +139,10 @@ public class Locacao implements Serializable {
 
     public void setObservacao(String observacao) {
         this.observacao = observacao;
+    }
+
+    public Aluguel getAluguel() {
+        return aluguel;
     }
 
     @Override

@@ -45,9 +45,9 @@ public class AluguelResouce {
 
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Aluguel> update(@PathVariable Long id, @RequestBody Aluguel Aluguel){
-        Aluguel = AluguelServices.update(id,Aluguel);
-        return ResponseEntity.ok().body(Aluguel);
+    public ResponseEntity<Aluguel> update(@PathVariable Long id, @RequestBody Aluguel aluguel){
+        aluguel = AluguelServices.update(id,aluguel);
+        return ResponseEntity.ok().body(aluguel);
     }
 
 

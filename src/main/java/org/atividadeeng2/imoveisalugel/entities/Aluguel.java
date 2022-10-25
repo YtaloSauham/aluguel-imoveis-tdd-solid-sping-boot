@@ -1,10 +1,12 @@
 package org.atividadeeng2.imoveisalugel.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -25,6 +27,9 @@ public class Aluguel {
 
     private String observacao;
 
+    @OneToMany(mappedBy = "aluguel")
+    @JsonIgnore
+    private List<Locacao> locacao = new ArrayList<>();
 
     public Aluguel(Long id, LocalDate dataVencimento, Double valorPago, LocalDate dataPagamento, String observacao) {
         this.id = id;
