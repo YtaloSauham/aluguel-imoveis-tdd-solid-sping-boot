@@ -55,6 +55,7 @@ public class TestConfig implements CommandLineRunner {
         imoveltest.setId(null);
         imoveltest.setMetragem("40");
         imoveltest.setEndereco("RUA CALOTE");
+        imoveltest.setBairro("Cohatrac");
         imoveltest.setValorAluguelSugerido(500.00);
         imoveltest.setTipoImovel(ImoveisTipoStatus.APARTAMENTO);
 

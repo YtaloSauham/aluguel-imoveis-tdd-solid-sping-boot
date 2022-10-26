@@ -14,30 +14,30 @@ import java.util.Optional;
 public class ImoveisServices {
 
     @Autowired
-    private ImoveisRepository ImoveisRepository;
+    private ImoveisRepository imoveisRepository;
 
     public Imoveis insertImoveisFromRepository(Imoveis Imoveis){
-        return ImoveisRepository.save(Imoveis);
+        return imoveisRepository.save(Imoveis);
     }
 
     public void insertAllImoveisIntoRepository(List<Imoveis> Imoveiss){
-         ImoveisRepository.saveAll(Imoveiss);
+         imoveisRepository.saveAll(Imoveiss);
     }
 
     public List<Imoveis> findAllImoveissFromRepository(){
-        return ImoveisRepository.findAll();
+        return imoveisRepository.findAll();
     }
 
     public Imoveis findImoveisByIdFromRepository(Long id){
-       Optional<Imoveis> ImoveisToUpdate = ImoveisRepository.findById(id);
-       return ImoveisToUpdate.orElseThrow(()-> new ResouceNotFoundException(id));
+       Optional<Imoveis> imoveisToUpdate = imoveisRepository.findById(id);
+       return imoveisToUpdate.orElseThrow(()-> new ResouceNotFoundException(id));
 
     }
 
-    public Imoveis update(Long id, Imoveis ImoveisUpdated){
-        Imoveis ImoveisToUpdate = ImoveisRepository.getReferenceById(id);
-        updateData(ImoveisToUpdate,ImoveisUpdated);
-        return ImoveisRepository.save(ImoveisToUpdate);
+    public Imoveis update(Long id, Imoveis imoveisUpdated){
+        Imoveis ImoveisToUpdate = imoveisRepository.getReferenceById(id);
+        updateData(ImoveisToUpdate,imoveisUpdated);
+        return imoveisRepository.save(ImoveisToUpdate);
     }
 
     private void updateData(Imoveis ImoveisToUpdate, Imoveis ImoveisUpdated) {
@@ -53,8 +53,13 @@ public class ImoveisServices {
     }
 
     public void deleteImoveisById(Long id){
-        ImoveisRepository.deleteById(id);
+        imoveisRepository.deleteById(id);
     }
 
+    public List<Imoveis> findImoveisByBairroFromRepository(String bairro){
+        List<Imoveis> imoveisList =imoveisRepository.findByBairro(bairro);
+        return imoveisList;
+
+    }
 
 }

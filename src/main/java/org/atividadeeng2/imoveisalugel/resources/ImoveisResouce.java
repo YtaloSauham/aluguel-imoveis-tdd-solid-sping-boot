@@ -25,6 +25,12 @@ public class ImoveisResouce {
         return ResponseEntity.ok().body(listImoveisFromRepository);
     }
 
+    @GetMapping(value = "/{bairro}")
+    public ResponseEntity<List<Imoveis>> findImoveisByBairro(@PathVariable String bairro){
+        List<Imoveis> listImoveisFromRepository = imoveisServices.findImoveisByBairroFromRepository(bairro);
+        return ResponseEntity.ok().body(listImoveisFromRepository);
+    }
+
     @PostMapping
     public ResponseEntity<Imoveis> insertImoveis(@RequestBody Imoveis imoveis){
         imoveis = imoveisServices.insertImoveisFromRepository(imoveis);

@@ -79,7 +79,7 @@ public class LocacaoResoucerTest {
     public void fazAltualizacaoDoLocacaoeOuErro() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.put("http://localhost:8080/locacao/1")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"id\": \"1\",\"valorPago\": \"46.0\", \"observacao\":\"sofri calote\"}")).andDo(MockMvcResultHandlers.print())
+                        .content("{\"id\": \"1\",\"endereco\": \"RUA SEM CALOTE\", \"observacao\":\"sofri calote\"}")).andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
