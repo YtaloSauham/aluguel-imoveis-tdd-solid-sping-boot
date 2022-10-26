@@ -38,7 +38,7 @@ public class TestConfig implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         User clientTest1 = new User(null,"Ytalo",99999,9999,"fulano@hotmail.com", LocalDate.of(2001,02,21));
-        User clientTest2 = new User(null,"Ytalo",99999,9999,"fulano@hotmail.com", LocalDate.of(2001,02,21));
+        User clientTest2 = new User(null,"Clara",99999,9999,"fulano@hotmail.com", LocalDate.of(2001,02,21));
 
         Aluguel aluguelTest2 = new Aluguel();
 

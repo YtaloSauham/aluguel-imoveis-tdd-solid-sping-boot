@@ -38,7 +38,7 @@ public class TestConfig implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         User clientTest1 = new User(null,"Ytalo",99999,9999,"fulano@hotmail.com", LocalDate.of(2001,02,21));
-        User clientTest2 = new User(null,"Ytalo",99999,9999,"fulano@hotmail.com", LocalDate.of(2001,02,21));
+        User clientTest2 = new User(null,"Clara",99999,9999,"fulano@hotmail.com", LocalDate.of(2001,02,21));
 
         Aluguel aluguelTest2 = new Aluguel();
 
@@ -55,6 +55,7 @@ public class TestConfig implements CommandLineRunner {
         imoveltest.setId(null);
         imoveltest.setMetragem("40");
         imoveltest.setEndereco("RUA CALOTE");
+        imoveltest.setBairro("Cohatrac");
         imoveltest.setValorAluguelSugerido(500.00);
         imoveltest.setTipoImovel(ImoveisTipoStatus.APARTAMENTO);
 

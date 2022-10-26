@@ -1,8 +1,11 @@
 package org.atividadeeng2.imoveisalugel.resources;
 
 
+import org.atividadeeng2.imoveisalugel.entities.Imoveis;
 import org.atividadeeng2.imoveisalugel.entities.Locacao;
+import org.atividadeeng2.imoveisalugel.entities.User;
 import org.atividadeeng2.imoveisalugel.services.LocacaoServices;
+import org.atividadeeng2.imoveisalugel.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +21,8 @@ public class LocacaoResouce {
 
     @Autowired
     private LocacaoServices locacaoServices;
+    @Autowired
+    private UserServices userServices;
 
     @GetMapping
 
@@ -25,6 +30,13 @@ public class LocacaoResouce {
         List<Locacao> listlocacaoFromRepository = locacaoServices.findAllLocacaosFromRepository();
         return ResponseEntity.ok().body(listlocacaoFromRepository);
     }
+
+    @GetMapping(value = "/{name}")
+    public ResponseEntity<List<Locacao>> findLocacaoByNameClient(@PathVariable String name){
+        List<Locacao> listLocacaoFromRepository = locacaoServices.findLocacaoByNameClienFromRepository(userServices.findUserByName(name));
+        return ResponseEntity.ok().body(listLocacaoFromRepository);
+    }
+
 
     @PostMapping
     public ResponseEntity<Locacao> insertlocacao(@RequestBody Locacao locacao){

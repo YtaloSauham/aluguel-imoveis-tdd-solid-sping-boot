@@ -1,7 +1,9 @@
 package org.atividadeeng2.imoveisalugel.services;
 
 
+import org.atividadeeng2.imoveisalugel.entities.Imoveis;
 import org.atividadeeng2.imoveisalugel.entities.Locacao;
+import org.atividadeeng2.imoveisalugel.entities.User;
 import org.atividadeeng2.imoveisalugel.repositories.LocacaoRepository;
 import org.atividadeeng2.imoveisalugel.services.exceptions.ResouceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +56,12 @@ public class LocacaoServices {
 
     public void deleteLocacaoById(Long id){
         locacaoRepository.deleteById(id);
+    }
+
+    public List<Locacao> findLocacaoByNameClienFromRepository(User user){
+        List<Locacao>  locacaosList =locacaoRepository.findByInquilino(user);
+        return locacaosList ;
+
     }
 
 

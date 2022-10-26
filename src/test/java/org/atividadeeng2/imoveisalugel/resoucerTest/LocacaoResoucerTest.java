@@ -82,6 +82,12 @@ public class LocacaoResoucerTest {
                         .content("{\"id\": \"1\",\"endereco\": \"RUA SEM CALOTE\", \"observacao\":\"sofri calote\"}")).andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
+ @Test
+    public void deveTrazerLocacaoPeloNomeDoInquilino() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("http://localhost:8080/locacao/Ytalo"))
+                        .andExpect(MockMvcResultMatchers.status().isOk())
+                        .andDo(MockMvcResultHandlers.print());
+    }
 
 
 

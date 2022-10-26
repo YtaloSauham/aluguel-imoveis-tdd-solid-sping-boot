@@ -87,5 +87,12 @@ public class ImoveisResoucerTest {
                         .content("{\"id\": \"1\",\"bairro\": \"Cohama\", \"observacao\":\"nada de calote\"}")).andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
+    @Test
+    public void deveTrazerOsImoveisPorBairro() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("http://localhost:8080/imovel/Cohatrac"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print());
+    }
+
 
 }
