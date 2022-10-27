@@ -7,6 +7,7 @@ import org.atividadeeng2.imoveisalugel.services.exceptions.ResouceNotFoundExcept
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,43 +15,48 @@ import java.util.Optional;
 public class AluguelServices {
 
     @Autowired
-    private AluguelRepository AluguelRepository;
+    private AluguelRepository aluguelRepository;
 
     public Aluguel insertAluguelFromRepository(Aluguel Aluguel){
-        return AluguelRepository.save(Aluguel);
+        return aluguelRepository.save(Aluguel);
     }
 
     public void insertAllAluguelsIntoRepository(List<Aluguel> Aluguels){
-         AluguelRepository.saveAll(Aluguels);
+         aluguelRepository.saveAll(Aluguels);
     }
 
     public List<Aluguel> findAllAluguelsFromRepository(){
-        return AluguelRepository.findAll();
+        return aluguelRepository.findAll();
     }
 
     public Aluguel findAluguelByIdFromRepository(Long id){
-       Optional<Aluguel> AluguelToUpdate = AluguelRepository.findById(id);
-       return AluguelToUpdate.orElseThrow(()-> new ResouceNotFoundException(id));
+       Optional<Aluguel> aluguelToUpdate = aluguelRepository.findById(id);
+       return aluguelToUpdate.orElseThrow(()-> new ResouceNotFoundException(id));
 
     }
 
-    public Aluguel update(Long id, Aluguel AluguelUpdated){
-        Aluguel AluguelToUpdate = AluguelRepository.getReferenceById(id);
-        updateData(AluguelToUpdate,AluguelUpdated);
-        return AluguelRepository.save(AluguelToUpdate);
+    public Aluguel update(Long id, Aluguel aluguelUpdated){
+        Aluguel aluguelToUpdate = aluguelRepository.getReferenceById(id);
+        updateData(aluguelToUpdate,aluguelUpdated);
+        return aluguelRepository.save(aluguelToUpdate);
     }
 
-    private void updateData(Aluguel AluguelToUpdate, Aluguel AluguelUpdated) {
-        AluguelToUpdate.setDataPagamento(AluguelUpdated.getDataPagamento());
-        AluguelToUpdate.setDataVencimento(AluguelUpdated.getDataVencimento());
-        AluguelToUpdate.setValorPago(AluguelUpdated.getValorPago());
-        AluguelToUpdate.setObservacao(AluguelUpdated.getObservacao());
+    private void updateData(Aluguel aluguelToUpdate, Aluguel aluguelUpdated) {
+        aluguelToUpdate.setDataPagamento(aluguelUpdated.getDataPagamento());
+        aluguelToUpdate.setDataVencimento(aluguelUpdated.getDataVencimento());
+        aluguelToUpdate.setValorPago(aluguelUpdated.getValorPago());
+        aluguelToUpdate.setObservacao(aluguelUpdated.getObservacao());
 
     }
 
     public void deleteAluguelById(Long id){
-        AluguelRepository.deleteById(id);
+        aluguelRepository.deleteById(id);
     }
 
-
+    public Aluguel payRent(Long id, Double valor){
+        Aluguel aluguelFind = aluguelRepository.getReferenceById(id);
+        aluguelFind.setDataPagamento(LocalDate.now());
+        aluguelFind.setValorPago(valor);
+        return aluguelRepository.save(aluguelFind);
+    }
 }

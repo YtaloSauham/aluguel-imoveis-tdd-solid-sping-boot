@@ -87,6 +87,13 @@ public class AluguelResoucerTest {
                         .content("{\"id\": \"1\",\"valorPago\": \"46.0\", \"observacao\":\"sofri calote\"}")).andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
+ @Test
+    public void deveFazerOPagamentodoAluguelOuErro() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.put("http://localhost:8080/aluguel/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"valor\": \"48.0\"}")).andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
 
 
 

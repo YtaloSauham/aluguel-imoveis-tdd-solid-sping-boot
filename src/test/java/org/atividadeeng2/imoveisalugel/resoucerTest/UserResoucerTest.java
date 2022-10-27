@@ -91,6 +91,7 @@ public class UserResoucerTest{
                 .andExpect(MockMvcResultMatchers.status().isNoContent());
     }
 
+
     @Test
     public void fazAltualizacaoDoClienteOuErro() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.put("http://localhost:8080/users/1")
@@ -98,7 +99,6 @@ public class UserResoucerTest{
                         .content("{\"name\": \"Ytalo2\", \"email\":\"fulano@hotmail.com\"}")).andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
-
 
 
 

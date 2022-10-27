@@ -17,38 +17,39 @@ import java.util.List;
 public class AluguelResouce {
 
     @Autowired
-    private AluguelServices AluguelServices;
+    private AluguelServices aluguelServices;
 
     @GetMapping
 
     public ResponseEntity<List<Aluguel>> findAllAluguels(){
-        List<Aluguel> listAluguelFromRepository = AluguelServices.findAllAluguelsFromRepository();
+        List<Aluguel> listAluguelFromRepository = aluguelServices.findAllAluguelsFromRepository();
         return ResponseEntity.ok().body(listAluguelFromRepository);
     }
 
     @PostMapping
-    public ResponseEntity<Aluguel> insertAluguel(@RequestBody Aluguel Aluguel){
-        Aluguel = AluguelServices.insertAluguelFromRepository(Aluguel);
+    public ResponseEntity<Aluguel> insertAluguel(@RequestBody Aluguel aluguel){
+        aluguel = aluguelServices.insertAluguelFromRepository(aluguel);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri()
                 .path("/{id}")
-                .buildAndExpand(Aluguel.getId())
+                .buildAndExpand(aluguel.getId())
                 .toUri();
-        return ResponseEntity.created(uri).body(Aluguel);
+        return ResponseEntity.created(uri).body(aluguel);
 
     }
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void>delete(@PathVariable Long id){
-        AluguelServices.deleteAluguelById(id);
+        aluguelServices.deleteAluguelById(id);
         return ResponseEntity.noContent().build();
     }
 
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<Aluguel> update(@PathVariable Long id, @RequestBody Aluguel aluguel){
-        aluguel = AluguelServices.update(id,aluguel);
+        aluguel = aluguelServices.update(id,aluguel);
         return ResponseEntity.ok().body(aluguel);
     }
+
 
 
 
