@@ -1,6 +1,7 @@
 package org.atividadeeng2.imoveisalugel.services;
 
 
+import org.atividadeeng2.imoveisalugel.entities.Aluguel;
 import org.atividadeeng2.imoveisalugel.entities.Imoveis;
 import org.atividadeeng2.imoveisalugel.entities.Locacao;
 import org.atividadeeng2.imoveisalugel.entities.User;
@@ -64,5 +65,10 @@ public class LocacaoServices {
 
     }
 
+    public List<Locacao> findByAluguel(List<Aluguel> aluguel){
+        List<Locacao> locacaoList = locacaoRepository.findByAluguel(aluguel);
+        return locacaoList;
+    }
 
-}
+
+    }

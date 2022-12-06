@@ -2,12 +2,15 @@ package org.atividadeeng2.imoveisalugel.services;
 
 
 import org.atividadeeng2.imoveisalugel.entities.Aluguel;
+import org.atividadeeng2.imoveisalugel.entities.Locacao;
+import org.atividadeeng2.imoveisalugel.entities.User;
 import org.atividadeeng2.imoveisalugel.repositories.AluguelRepository;
 import org.atividadeeng2.imoveisalugel.services.exceptions.ResouceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +19,9 @@ public class AluguelServices {
 
     @Autowired
     private AluguelRepository aluguelRepository;
+
+    @Autowired
+    private LocacaoServices localServices;
 
     public Aluguel insertAluguelFromRepository(Aluguel Aluguel){
         return aluguelRepository.save(Aluguel);
@@ -59,4 +65,23 @@ public class AluguelServices {
         aluguelFind.setValorPago(valor);
         return aluguelRepository.save(aluguelFind);
     }
+
+    public List<User> findAllUsersWhoHaveNotPaid(){
+
+        List<Aluguel> listAluguelWhoHaveNotPaid= aluguelRepository.findByPayment(null);
+        List<Locacao> listLocacaoUsersWhoHaveNotPaid = localServices.findByAluguel(listAluguelWhoHaveNotPaid);
+        List<User> listUsersWhoHaveNotPaid = new ArrayList<User>() ;
+        for(Locacao locacao: listLocacaoUsersWhoHaveNotPaid){
+            listUsersWhoHaveNotPaid.add(locacao.getInquilino());
+        }
+
+        return listUsersWhoHaveNotPaid;
+    }
+
+    public List<Aluguel> findAluguelByPayment(Float valorPago){
+        List<Aluguel> aluguelList = aluguelRepository.findByPayment(valorPago);
+        return aluguelList;
+    }
+
+
 }
