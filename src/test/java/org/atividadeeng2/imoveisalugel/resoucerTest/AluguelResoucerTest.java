@@ -8,6 +8,8 @@ import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
+import org.powermock.core.spi.PowerMockTestListener;
+import org.powermock.tests.utils.impl.PowerMockTestNotifierImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,7 +26,7 @@ import java.time.LocalDate;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc()
-public class AluguelResoucerTest {
+public class AluguelResoucerTest extends PowerMockTestNotifierImpl {
 
     @Autowired
      MockMvc mockMvc;
@@ -34,6 +36,10 @@ public class AluguelResoucerTest {
 
     @Autowired
     private AluguelRepository AluguelRepository;
+
+    public AluguelResoucerTest(PowerMockTestListener[] powerMockTestListeners) {
+        super(powerMockTestListeners);
+    }
 
 
     /*
@@ -94,6 +100,11 @@ public class AluguelResoucerTest {
                         .content("{\"valor\": \"48.0\"}")).andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
+
+
+
+
+
 
 
 

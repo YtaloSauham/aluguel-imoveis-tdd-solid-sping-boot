@@ -2,11 +2,13 @@ package org.atividadeeng2.imoveisalugel.services;
 
 
 import org.atividadeeng2.imoveisalugel.entities.Aluguel;
+import org.atividadeeng2.imoveisalugel.entities.Email;
 import org.atividadeeng2.imoveisalugel.entities.Locacao;
 import org.atividadeeng2.imoveisalugel.entities.User;
 import org.atividadeeng2.imoveisalugel.repositories.AluguelRepository;
 import org.atividadeeng2.imoveisalugel.services.exceptions.ResouceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -82,6 +84,20 @@ public class AluguelServices {
         List<Aluguel> aluguelList = aluguelRepository.findByPayment(valorPago);
         return aluguelList;
     }
+
+    public void sendAnEmailToUsersWhoHaveNotPaid(){
+        List<User> userList = findAllUsersWhoHaveNotPaid();
+        Email sendEmail= new Email() ;
+        for(User users: userList){
+            sendEmail.send( "Devendo", users.getEmail(), "Você ainda não realizou o pagamento");
+        }
+
+
+
+
+    }
+
+
 
 
 }
